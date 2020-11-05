@@ -1,0 +1,41 @@
+version: '3'
+services:
+  fpm:
+    build:
+      ./docker/php/
+    image: bitnami/php-fpm
+    restart: always
+    cap_add:
+      - ALL
+    volumes:
+      - ./:/app
+    ports:
+      - '8000:80'
+    depends_on:
+      - db
+  nginx-chat:
+      container_name: nginx_1
+      image: nginx
+      restart: always
+      depends_on:
+        - fpm
+      links:
+        - fpm:fpm.local
+      ports:
+      - "8232:80"
+      volumes:
+          - ./:/app
+          - ./docker/nginx/:/etc/nginx/conf.d
+  db:
+      container_name: db
+      build:
+        ./docker/postgres
+      image: postgres:11
+      volumes:
+          - ./docker/postgres:/var/lib/postgresql/data
+      environment:
+          - POSTGRES_DB=phpmyadmin
+          - POSTGRES_USER=user
+          - POSTGRES_PASSWORD=123456
+      ports:
+          - "3232"
