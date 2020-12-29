@@ -15,11 +15,11 @@ RESTful API для работы с курсами обмена валют для
 
 1) GET /v1/method=rates - получение всех курсов с учетом комиссии = 2% (GET запрос) в формате :
     {
-    	“status”: “success”,
-    	“code”: 200,
-    	“data”: {
-    	“USD” : <rate>,
-    	...
+        “status”: “success”,
+        “code”: 200,
+        “data”: {
+        “USD” : <rate>,
+        ...
     }
     
    /v1/method=rates&currency=usd - получение конкретного курса :
@@ -36,7 +36,18 @@ RESTful API для работы с курсами обмена валют для
         "currency_to": "BTC"
         "value": 1.00
     }
-
+    
+    response:
+    {
+    	“status”: “success”,
+    	“code”: 200,
+    	“data”: {
+    	“currency_from” : BTC,
+    	“currency_to” : USD,
+    	“value”: 1.00,
+    	“converted_value”: 1.00,
+    	“rate” : 1.00,
+    }
 ***
 ***
 # Альтернативные варианты запросов:
