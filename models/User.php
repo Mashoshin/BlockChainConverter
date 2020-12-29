@@ -16,7 +16,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'username' => 'admin',
             'password' => 'admin',
             'authKey' => 'test100key',
-            'accessToken' => '100-token',
+            'accessToken' => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
         ],
         '101' => [
             'id' => '101',
@@ -100,5 +100,19 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+    }
+
+    public static function getAll()
+    {
+    	$result = [];
+
+    	foreach (self::$users as $user) {
+    		$result[] = [
+    			'id' => $user['id'],
+			    'username' => $user['username']
+		    ];
+	    }
+
+    	return $result;
     }
 }

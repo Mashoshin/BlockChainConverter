@@ -16,7 +16,7 @@ class UserTest extends \Codeception\Test\Unit
 
     public function testFindUserByAccessToken()
     {
-        expect_that($user = User::findIdentityByAccessToken('100-token'));
+        expect_that($user = User::findIdentityByAccessToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'));
         expect($user->username)->equals('admin');
 
         expect_not(User::findIdentityByAccessToken('non-existing'));        
